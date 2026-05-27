@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>QR – Álbum Antonio Garzon Henao</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap" rel="stylesheet"/>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      background: radial-gradient(ellipse at 50% 20%, #1a2a6c 0%, #080c22 65%, #000 100%);
+      font-family: 'Outfit', system-ui, sans-serif;
+      color: #f0f4ff;
+      display: flex; align-items: center; justify-content: center;
+      padding: 32px;
+    }
+    .card {
+      background: rgba(17,24,53,0.95);
+      border: 1px solid rgba(240,192,64,0.3);
+      border-radius: 28px;
+      padding: 36px 32px;
+      max-width: 380px; width: 100%;
+      text-align: center;
+      box-shadow: 0 0 60px rgba(240,192,64,0.1), 0 32px 80px rgba(0,0,0,0.5);
+    }
+    .trophy { font-size: 52px; margin-bottom: 10px; animation: float 3s ease-in-out infinite; }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-7px)} }
+    h1 { font-size: 20px; font-weight: 900; margin-bottom: 4px; }
+    h1 em { font-style:normal; background: linear-gradient(135deg,#f0c040,#fff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    .sub { font-size: 13px; color: #8b9cc8; margin-bottom: 24px; }
+
+    .qr-box {
+      background: white;
+      border-radius: 18px;
+      padding: 18px;
+      display: inline-block;
+      box-shadow: 0 0 0 4px rgba(240,192,64,0.35), 0 12px 40px rgba(0,0,0,0.4);
+      margin-bottom: 20px;
+    }
+    #qr canvas { display: block; border-radius: 6px; }
+
+    .url {
+      background: rgba(79,142,247,0.1);
+      border: 1px solid rgba(79,142,247,0.3);
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 13px; font-weight: 700; color: #6ab0ff;
+      word-break: break-all;
+      margin-bottom: 22px;
+    }
+    .steps {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 16px;
+      text-align: left;
+    }
+    .step { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; font-size: 14px; color: #c0ccee; }
+    .step:last-child { margin-bottom: 0; }
+    .num {
+      flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%;
+      background: linear-gradient(135deg,#4f8ef7,#a855f7);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 900; color: white;
+    }
+  </style>
+</head>
+<body>
+<div class="card">
+  <div class="trophy">🏆</div>
+  <h1>Álbum <em>Antonio Garzon Henao</em></h1>
+  <p class="sub">FIFA World Cup 2026™ · Panini</p>
+
+  <div class="qr-box">
+    <div id="qr"></div>
+  </div>
+
+  <div class="url">https://emjuridicas.github.io/ALBUN-PANINI-2026</div>
+
+  <div class="steps">
+    <div class="step"><div class="num">1</div>Abre la <strong style="color:#fff;margin:0 4px">Cámara</strong> del iPhone y apunta aquí</div>
+    <div class="step"><div class="num">2</div>Toca la notificación → abre en <strong style="color:#fff;margin:0 4px">Safari</strong></div>
+    <div class="step"><div class="num">3</div>Toca <strong style="color:#fff;margin:0 4px">Compartir ⬆</strong> → "Añadir a pantalla de inicio"</div>
+    <div class="step"><div class="num">4</div>Toca <strong style="color:#fff;margin:0 4px">Añadir</strong> · ¡Listo! 🎉</div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+  new QRCode(document.getElementById('qr'), {
+    text: 'https://emjuridicas.github.io/ALBUN-PANINI-2026',
+    width: 240,
+    height: 240,
+    colorDark: '#000000',
+    colorLight: '#ffffff',
+    correctLevel: QRCode.CorrectLevel.H
+  });
+</script>
+</body>
+</html>

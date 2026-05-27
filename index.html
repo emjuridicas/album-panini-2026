@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Álbum 2026" />
+  <meta name="theme-color" content="#080c22" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icon-512.png" />
+  <title>Álbum Panini FIFA 2026 – Antonio Garzon Henao</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(() => {});
+      });
+    }
+  </script>
+</head>
+<body>
+
+<!-- ===================== SPLASH SCREEN ===================== -->
+<div id="splash" class="splash">
+  <div class="splash-bg"></div>
+  <div class="splash-content">
+    <div class="trophy-ring">
+      <div class="trophy-icon">🏆</div>
+      <div class="ring-orbit"></div>
+    </div>
+    <div class="splash-logo">PANINI</div>
+    <div class="splash-title">FIFA WORLD CUP<br /><span class="splash-year">2026™</span></div>
+    <div class="splash-divider"></div>
+    <div class="splash-owner">Álbum de</div>
+    <div class="splash-name">Antonio Garzon Henao</div>
+    <div class="splash-countries">🇺🇸 🇨🇦 🇲🇽</div>
+    <button class="splash-btn" id="enterBtn">
+      <span>Iniciar Mi Álbum</span>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- ===================== MAIN APP ===================== -->
+<div id="app" class="app hidden">
+
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <button class="back-btn hidden" id="backBtn" aria-label="Volver">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <span class="topbar-title" id="topbarTitle">🏆 Mi Álbum</span>
+    </div>
+    <div class="topbar-right">
+      <button class="icon-btn" id="resetBtn" title="Reiniciar" aria-label="Reiniciar álbum">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><polyline points="3 3 3 8 8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- PROGRESS BAR -->
+  <div class="progress-section" id="progressSection">
+    <div class="progress-stats">
+      <span id="statOwned">0 tengo</span>
+      <span id="statMissing" class="highlight">980 me faltan</span>
+      <span id="statTotal">de 980</span>
+    </div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
+    </div>
+    <div class="progress-pct" id="progressPct">0%</div>
+  </div>
+
+  <!-- VIEWS CONTAINER -->
+  <main class="views">
+
+    <!-- HOME VIEW -->
+    <div id="viewHome" class="view active">
+
+      <!-- SPECIAL SECTIONS -->
+      <section class="section-block">
+        <h2 class="section-heading">📋 Secciones Especiales</h2>
+        <div class="special-grid" id="specialGrid"></div>
+      </section>
+
+      <!-- GROUPS -->
+      <section class="section-block">
+        <h2 class="section-heading">⚽ Grupos y Selecciones</h2>
+        <div class="groups-list" id="groupsList"></div>
+      </section>
+
+    </div><!-- end viewHome -->
+
+    <!-- TEAM VIEW -->
+    <div id="viewTeam" class="view">
+      <div class="team-header" id="teamHeader"></div>
+      <div class="stickers-grid" id="stickersGrid"></div>
+    </div>
+
+    <!-- SPECIAL SECTION VIEW -->
+    <div id="viewSpecial" class="view">
+      <div class="team-header" id="specialHeader"></div>
+      <div class="stickers-grid" id="specialStickersGrid"></div>
+    </div>
+
+  </main>
+
+  <!-- BOTTOM NAV -->
+  <nav class="bottom-nav">
+    <button class="nav-btn active" id="navHome" aria-label="Inicio">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke="currentColor" stroke-width="2"/><polyline points="9 22 9 12 15 12 15 22" stroke="currentColor" stroke-width="2"/></svg>
+      <span>Inicio</span>
+    </button>
+    <button class="nav-btn" id="navMissing" aria-label="Me faltan">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><line x1="12" y1="8" x2="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="12" y1="16" x2="12.01" y2="16" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
+      <span>Me Faltan</span>
+    </button>
+    <button class="nav-btn" id="navDuplicated" aria-label="Repetidas">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="9" y="9" width="13" height="13" rx="2" stroke="currentColor" stroke-width="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" stroke="currentColor" stroke-width="2"/></svg>
+      <span>Repetidas</span>
+    </button>
+    <button class="nav-btn" id="navStats" aria-label="Estadísticas">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><line x1="18" y1="20" x2="18" y2="10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="12" y1="20" x2="12" y2="4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="6" y1="20" x2="6" y2="14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <span>Stats</span>
+    </button>
+  </nav>
+
+  <!-- MISSING VIEW (overlay) -->
+  <div id="viewMissing" class="overlay-view hidden">
+    <div class="overlay-header">
+      <span>🔍 Me Faltan</span>
+      <button class="close-overlay" id="closeMissing">✕</button>
+    </div>
+    <div class="missing-list" id="missingList"></div>
+  </div>
+
+  <!-- DUPLICATED VIEW (overlay) -->
+  <div id="viewDuplicated" class="overlay-view hidden">
+    <div class="overlay-header">
+      <span>📦 Repetidas</span>
+      <button class="close-overlay" id="closeDuplicated">✕</button>
+    </div>
+    <div class="duplicated-list" id="duplicatedList"></div>
+  </div>
+
+  <!-- STATS VIEW (overlay) -->
+  <div id="viewStats" class="overlay-view hidden">
+    <div class="overlay-header">
+      <span>📊 Estadísticas</span>
+      <button class="close-overlay" id="closeStats">✕</button>
+    </div>
+    <div class="stats-content" id="statsContent"></div>
+  </div>
+
+</div><!-- end app -->
+
+<!-- TOAST -->
+<div id="toast" class="toast"></div>
+
+<!-- CONFIRM MODAL -->
+<div id="confirmModal" class="modal-overlay hidden">
+  <div class="modal-card">
+    <div class="modal-icon">⚠️</div>
+    <h3>¿Reiniciar álbum?</h3>
+    <p>Se borrarán todos los datos guardados.</p>
+    <div class="modal-btns">
+      <button id="confirmCancel" class="btn-secondary">Cancelar</button>
+      <button id="confirmOk" class="btn-danger">Reiniciar</button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

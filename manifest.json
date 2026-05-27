@@ -1,0 +1,26 @@
+{
+  "name": "Álbum Antonio Garzon Henao",
+  "short_name": "Álbum 2026",
+  "description": "Control de fichas Panini FIFA World Cup 2026 de Antonio Garzon Henao",
+  "start_url": "/ALBUN-PANINI-2026/index.html",
+  "scope": "/ALBUN-PANINI-2026/",
+  "display": "standalone",
+  "background_color": "#080c22",
+  "theme_color": "#080c22",
+  "orientation": "portrait",
+  "lang": "es",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
